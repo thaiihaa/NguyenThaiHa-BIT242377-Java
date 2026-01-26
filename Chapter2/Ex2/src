@@ -1,1 +1,38 @@
+package Baitap;
 
+interface Notification {
+    void notifyUser();
+}
+
+class SMSNotification implements Notification {
+    @Override
+    public void notifyUser() { System.out.println("Gửi tin nhắn SMS thành công!"); }
+}
+
+class EmailNotification implements Notification {
+    @Override
+    public void notifyUser() { System.out.println("Gửi Email thành công!"); }
+}
+
+class NotificationFactory {
+    public Notification createNotification(String channel) {
+        if (channel == null) return null;
+        return switch (channel.toUpperCase()) {
+            case "SMS" -> new SMSNotification();
+            case "EMAIL" -> new EmailNotification();
+            default -> throw new IllegalArgumentException("Kênh không hợp lệ: " + channel);
+        };
+    }
+}
+
+public class Bai2 {
+    public static void main(String[] args) {
+        NotificationFactory factory = new NotificationFactory();
+
+        Notification n1 = factory.createNotification("SMS");
+        n1.notifyUser();
+
+        Notification n2 = factory.createNotification("EMAIL");
+        n2.notifyUser();
+    }
+}

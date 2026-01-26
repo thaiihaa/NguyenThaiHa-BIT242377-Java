@@ -1,1 +1,39 @@
+package Baitap;
+
+class DatabaseConnection {
+    // Biến static lưu instance duy nhất
+    private static DatabaseConnection instance;
+
+    // Constructor private để ngăn khởi tạo từ bên ngoài
+    private DatabaseConnection() {
+        System.out.println("--- Kết nối Database đã được khởi tạo! ---");
+    }
+
+    // Phương thức static để lấy instance
+    public static DatabaseConnection getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
+
+    public void executeQuery(String query) {
+        System.out.println("Đang thực thi: " + query);
+    }
+}
+
+public class Bai1 {
+    public static void main(String[] args) {
+        // Lấy instance lần đầu
+        DatabaseConnection db1 = DatabaseConnection.getInstance();
+        db1.executeQuery("SELECT * FROM Users");
+
+        // Lấy instance lần hai
+        DatabaseConnection db2 = DatabaseConnection.getInstance();
+        
+        // Kiểm tra xem db1 và db2 có phải là một không
+        System.out.println("db1 == db2: " + (db1 == db2));
+    }
+}
+
 

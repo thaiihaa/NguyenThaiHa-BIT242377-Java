@@ -1,1 +1,43 @@
+package Baitap;
+
+import java.util.concurrent.CompletableFuture;
+
+public class bai4 {
+
+    public static void main(String[] args) {
+
+        CompletableFuture<Void> checkStock =
+            CompletableFuture.runAsync(() -> {
+                sleep(2000);
+                System.out.println("Kiem tra tinh trang san pham hoan thanh");
+            });
+
+        CompletableFuture<Void> payment =
+            CompletableFuture.runAsync(() -> {
+                sleep(3000);
+                System.out.println("Thanh toan hoan thanh");
+            });
+
+        CompletableFuture<Void> shipping =
+            CompletableFuture.runAsync(() -> {
+                sleep(2500);
+                System.out.println("Van chuyen don hang hoan thanh");
+            });
+
+        // Kết hợp tất cả tác vụ
+        CompletableFuture<Void> allTasks =
+            CompletableFuture.allOf(checkStock, payment, shipping);
+
+        allTasks.join();
+        System.out.println("Don hang da duoc xu ly HOAN TAT!");
+    }
+
+    private static void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
 

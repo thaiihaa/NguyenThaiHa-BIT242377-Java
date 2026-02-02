@@ -1,1 +1,28 @@
+package Baitap;
+
+// Thread kế thừa Thread
+class WorkerThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Thread dang chay...");
+    }
+}
+
+// Runnable triển khai Runnable
+class WorkerRunnable implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Runnable dang chay...");
+    }
+}
+
+public class bai1 {
+    public static void main(String[] args) {
+        WorkerThread t1 = new WorkerThread();
+        Thread t2 = new Thread(new WorkerRunnable());
+
+        t1.start();
+        t2.start();
+    }
+}
 

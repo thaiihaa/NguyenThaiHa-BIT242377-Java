@@ -1,1 +1,20 @@
+package BaiTap;
 
+@FunctionalInterface
+interface MathOperation {
+    int compute(int a, int b);
+}
+
+public class Bai1 {
+    public static void main(String[] args) {
+        MathOperation addition = (a, b) -> a + b;
+        MathOperation subtraction = (a, b) -> a - b;
+        MathOperation multiplication = (a, b) -> a * b;
+        MathOperation division = (a, b) -> (b != 0) ? a / b : 0;
+
+        System.out.println("Cộng: " + addition.compute(10, 5));
+        System.out.println("Trừ: " + subtraction.compute(10, 5));
+        System.out.println("Nhân: " + multiplication.compute(10, 5));
+        System.out.println("Chia: " + division.compute(10, 5));
+    }
+}
